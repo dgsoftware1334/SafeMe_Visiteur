@@ -19,6 +19,13 @@ class HomeState extends State<Home> {
         ),
         centerTitle: true,
         backgroundColor: Colors.greenAccent,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search_off_outlined),
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              })
+        ],
       ),
       body: ListView(
         children: <Widget>[
@@ -41,12 +48,12 @@ class HomeState extends State<Home> {
               width: double.infinity,
               height: 100,
               child: Image.asset(
-                'images/pic_3.png',
+                'images/drawer.jpg',
                 fit: BoxFit.fill,
               ),
             ),
             onLongPress: () {
-              Navigator.of(context).pushNamed('About');
+              Navigator.of(context).pushNamed('AboutApp');
             },
           ),
           Padding(
@@ -82,5 +89,35 @@ class HomeState extends State<Home> {
       ),
       drawer: Drawers(),
     );
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // Action for AppBar
+    return [IconButton(icon: Icon(Icons.clear), onPressed: () {})];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // Icon li tji f lewel kima ListTile
+    return IconButton(
+        icon: Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          close(context, null);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // result
+    return null;
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // كي يكون واحد يحوس على حاجة
+    return Text('body search');
   }
 }
